@@ -68,7 +68,7 @@ $langs['es'] = $langs['regalo.tuned4u.com'];
 $langs['en'] = $langs['gift.tuned4u.com'];
 
 // Seleção: env var > domínio > fallback EN
-$cfg = $langs[$envLang] ?? $langs[$host] ?? $langs['gift.tuned4u.com'];
+$cfg = $langs[$envLang] ?? $langs[$host] ?? $cfg = $langs['regalo.tuned4u.com'];
 
 function jsStr($s) { return json_encode((string)$s, JSON_UNESCAPED_UNICODE); }
 ?>
