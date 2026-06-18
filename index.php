@@ -68,7 +68,7 @@ $langs['es'] = $langs['regalo.tuned4u.com'];
 $langs['en'] = $langs['gift.tuned4u.com'];
 
 // Seleção: env var > domínio > fallback EN
-$cfg = $langs[$envLang] ?? $langs[$host] ?? $cfg = $langs['regalo.tuned4u.com'];
+$cfg = $langs[$envLang] ?? $langs[$host] ?? $langs['gift.tuned4u.com'];
 
 function jsStr($s) { return json_encode((string)$s, JSON_UNESCAPED_UNICODE); }
 ?>
@@ -487,7 +487,7 @@ function jsStr($s) { return json_encode((string)$s, JSON_UNESCAPED_UNICODE); }
 
 <script>
   const SUPABASE_URL  = 'https://qqxmdszwvwooqonmnvzf.supabase.co';
-  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxeG1kc3p3dndvb3Fvbm1udnpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNjc3NzMsImV4cCI6MjA1OTY0Mzc3M30.U6pz0ov3B9hBRSHEn8pROkTFxoByIJjGjh7APbVkEYQ';
+  const SUPABASE_ANON = 'sb_publishable_NDbDHWxxykBQ2FqMRgMDZg_O-mir9hv';
 
   const uuid        = <?php echo jsStr($uuid); ?>;
   const table       = <?php echo jsStr($cfg['table']); ?>;
