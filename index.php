@@ -4,7 +4,6 @@ if (empty($uuid)) {
     $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     $uuid = $path;
 }
-
 $envLang = strtolower(trim(getenv('GIFT_LANG') ?: ''));
 $host    = strtolower($_SERVER['HTTP_HOST'] ?? '');
 
@@ -14,438 +13,493 @@ $langs = [
     'table'            => 'presentes_es',
     'html_lang'        => 'es',
     'page_title'       => 'Tuned4U — Tu Canción Personalizada',
+    'tribute_label'    => 'Un tributo especial para',
+    'love_from'        => 'Con amor, de',
     'error_title'      => 'Canción no encontrada',
-    'error_body'       => 'Este enlace puede ser inválido o la canción aún no ha sido generada. Si crees que es un error, contáctanos.',
-    'for_label'        => 'Una canción creada para',
+    'error_body'       => 'Este enlace puede ser inválido o la canción aún no ha sido generada.',
     'generating_title' => 'Componiendo tu canción...',
-    'generating_sub'   => 'Nuestra IA está creando algo único para ti. Esto generalmente tarda unos minutos.',
+    'generating_sub'   => 'Nuestra IA está creando algo único. Esto tarda unos minutos.',
     'refresh_btn'      => 'Verificar de nuevo',
-    'player_label'     => 'Tu canción personalizada',
-    'download_btn'     => 'Descargar canción',
-    'lyrics_label'     => 'Letra',
+    'lyrics_label'     => 'Letra de la canción',
+    'love_suffix'      => 'con amor ❤️',
+    'download_title'   => 'Descarga tu regalo',
+    'download_sub'     => 'Todos los archivos de tu tributo',
+    'dl_music'         => 'Música',
+    'dl_photo'         => 'Portada',
+    'share_whatsapp'   => 'Compartir por WhatsApp',
+    'cta_title'        => 'Crea una canción para alguien especial',
+    'cta_sub'          => 'Convierte tu historia en una canción personalizada en minutos.',
+    'cta_btn'          => 'Crear mi canción',
+    'cta_url'          => 'https://pago.tuned4u.com',
+    'footer_sub'       => 'Convirtiendo momentos en melodías inolvidables',
+    'support_label'    => '¿Preguntas?',
+    'support_email'    => 'contact@tuned4u.com',
+    'status_ready'     => 'GERADO',
     'copy_btn'         => 'Copiar',
     'copy_done'        => 'Copiado ✓',
-    'support_label'    => '¿Alguna pregunta sobre tu canción?',
-    'support_email'    => 'contact@tuned4u.com',
-    'footer_sub'       => 'Canciones creadas de historias reales · tuned4u.com',
-    'doc_title_suffix' => '— Tuned4U',
-    'status_ready'     => 'GERADO',
-    'cta_label'        => 'Crear una canción para otra persona',
-    'cta_url'          => 'https://pago.tuned4u.com',
-    'sections'         => [
-      'Intro'       => 'Intro',
-      'Verse'       => 'Verso',
-      'Verse 1'     => 'Verso 1',
-      'Verse 2'     => 'Verso 2',
-      'Pre-Chorus'  => 'Pre-Coro',
-      'Chorus'      => 'Coro',
-      'Final Chorus'=> 'Coro Final',
-      'Bridge'      => 'Puente',
-      'Outro'       => 'Outro',
+    'sections' => [
+      'Intro'=>'Intro','Verse'=>'Verso','Verse 1'=>'Verso 1','Verse 2'=>'Verso 2',
+      'Pre-Chorus'=>'Pre-Coro','Chorus'=>'Coro','Final Chorus'=>'Coro Final',
+      'Bridge'=>'Puente','Outro'=>'Outro',
     ],
     'chorus_keys' => ['Chorus','Final Chorus','Coro','Coro Final','Estribillo'],
+    'share_msg_tpl' => '🎵 Escucha "{title}" — ¡un tributo especial para {honoree}! Hecho con amor por Tuned4U ❤️\n\n{url}',
   ],
   'gift.tuned4u.com' => [
     'lang'             => 'en',
     'table'            => 'tuned4u_gifts',
     'html_lang'        => 'en',
     'page_title'       => 'Tuned4U — Your Personal Song',
+    'tribute_label'    => 'A special tribute for',
+    'love_from'        => 'With love, from',
     'error_title'      => 'Song not found',
     'error_body'       => "This link may be invalid or the song hasn't been generated yet.",
-    'for_label'        => 'A song created for',
     'generating_title' => 'Composing your song...',
-    'generating_sub'   => 'Our AI is crafting something unique for you. This usually takes a few minutes.',
+    'generating_sub'   => 'Our AI is crafting something unique. This usually takes a few minutes.',
     'refresh_btn'      => 'Check again',
-    'player_label'     => 'Your personalized song',
-    'download_btn'     => 'Download song',
-    'lyrics_label'     => 'Lyrics',
+    'lyrics_label'     => 'Song Lyrics',
+    'love_suffix'      => 'with love ❤️',
+    'download_title'   => 'Download your gift',
+    'download_sub'     => 'All files from your tribute',
+    'dl_music'         => 'Music',
+    'dl_photo'         => 'Photo',
+    'share_whatsapp'   => 'Share on WhatsApp',
+    'cta_title'        => 'Create a song for someone you love',
+    'cta_sub'          => 'Turn your story into an exclusive personalized song in minutes.',
+    'cta_btn'          => 'Create my song',
+    'cta_url'          => 'https://tuned4u.com',
+    'footer_sub'       => 'Turning moments into unforgettable melodies',
+    'support_label'    => 'Questions?',
+    'support_email'    => 'contact@tuned4u.com',
+    'status_ready'     => 'GERADO',
     'copy_btn'         => 'Copy',
     'copy_done'        => 'Copied ✓',
-    'support_label'    => 'Any questions about your song?',
-    'support_email'    => 'contact@tuned4u.com',
-    'footer_sub'       => 'Songs created from real stories · tuned4u.com',
-    'doc_title_suffix' => '— Tuned4U',
-    'status_ready'     => 'GERADO',
-    'cta_label'        => 'Create a song for someone else',
-    'cta_url'          => 'https://tuned4u.com',
     'sections'         => [],
     'chorus_keys'      => ['Chorus','Final Chorus'],
+    'share_msg_tpl'    => '🎵 Listen to "{title}" — a special tribute for {honoree}! Made with love by Tuned4U ❤️\n\n{url}',
   ],
 ];
-
 $langs['es'] = $langs['regalo.tuned4u.com'];
 $langs['en'] = $langs['gift.tuned4u.com'];
-
 $cfg = $langs[$envLang] ?? $langs[$host] ?? $langs['gift.tuned4u.com'];
-
-function jsStr($s) { return json_encode((string)$s, JSON_UNESCAPED_UNICODE); }
-function jsArr($a) { return json_encode($a, JSON_UNESCAPED_UNICODE); }
+function jsStr($s){return json_encode((string)$s,JSON_UNESCAPED_UNICODE);}
+function jsArr($a){return json_encode($a,JSON_UNESCAPED_UNICODE);}
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo htmlspecialchars($cfg['html_lang']); ?>">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><?php echo htmlspecialchars($cfg['page_title']); ?></title>
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --gold: #F5A623;
-      --gold-dim: rgba(245,166,35,0.18);
-      --gold-glow: rgba(245,166,35,0.06);
-      --bg: #0d0d0d;
-      --card: #141414;
-      --card2: #1a1a1a;
-      --border: rgba(245,166,35,0.14);
-      --text: #f0ead6;
-      --muted: #7a7060;
-      --chorus-bg: rgba(245,166,35,0.08);
-      --chorus-border: rgba(245,166,35,0.35);
-    }
-    html, body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245,166,35,0.07) 0%, transparent 65%); pointer-events: none; z-index: 0; }
-    .page { position: relative; z-index: 1; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title><?php echo htmlspecialchars($cfg['page_title']); ?></title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;
+  --gold2:#E8C97A;
+  --gold-grad:linear-gradient(135deg,#C9A84C,#E8C97A);
+  --bg:#0f0e0c;
+  --bg2:#161410;
+  --card:#1C1A16;
+  --card2:#221f19;
+  --border:rgba(201,168,76,0.18);
+  --border2:rgba(201,168,76,0.32);
+  --text:#F5F0E8;
+  --text2:#B8A880;
+  --muted:#6B6050;
+  --radius:16px;
+  --radius-sm:10px;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(201,168,76,0.07) 0%,transparent 60%);pointer-events:none;z-index:0}
+.page{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:32px 16px 80px}
+img{display:block}
 
-    /* Loading */
-    #loading { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
-    .spinner { width: 32px; height: 32px; border: 1.5px solid rgba(245,166,35,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+/* Loading / Error */
+.center-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center}
+.spinner{width:32px;height:32px;border:1.5px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.error-p{font-size:.85rem;color:var(--text2);line-height:1.6;max-width:300px}
+.error-a{color:var(--gold);font-size:.82rem;text-decoration:none;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px}
 
-    /* Error */
-    #error { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 32px; }
-    #error h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); }
-    #error p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; max-width: 340px; }
-    #error a { color: var(--gold); font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid rgba(245,166,35,0.3); padding-bottom: 2px; }
+/* Fade animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade1{animation:fadeUp .6s ease both}
+.fade2{animation:fadeUp .6s .12s ease both}
+.fade3{animation:fadeUp .6s .22s ease both}
+.fade4{animation:fadeUp .6s .32s ease both}
+.fade5{animation:fadeUp .6s .42s ease both}
+.fade6{animation:fadeUp .6s .52s ease both}
 
-    /* Content */
-    #content { display: none; min-height: 100vh; padding: 40px 20px 80px; }
-    .container { max-width: 620px; margin: 0 auto; }
+/* Header */
+.header-section{text-align:center;margin-bottom:28px}
+.header-icon{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:14px}
+.icon-circle{width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.tribute-label{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.honoree-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,9vw,3.6rem);font-weight:600;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:8px}
+.love-from{font-size:.82rem;color:var(--text2)}
+.love-from strong{color:var(--text);font-weight:500}
 
-    /* Logo */
-    .logo-wrap { text-align: center; margin-bottom: 36px; animation: fadeUp 0.7s ease both; }
-    .logo-wrap img { height: 44px; width: auto; object-fit: contain; }
+/* Cover + Player card */
+.player-card{background:rgba(28,26,22,.8);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:20px;backdrop-filter:blur(12px)}
+.cover-area{position:relative;max-width:280px;margin:24px auto 0;border-radius:14px;overflow:hidden}
+.cover-area img{width:100%;object-fit:cover;border-radius:14px;display:block}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,14,12,.92) 0%,rgba(15,14,12,.15) 50%,transparent 100%);border-radius:14px}
+.cover-text{position:absolute;bottom:14px;left:16px;right:16px}
+.cover-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:2px}
+.cover-style{font-size:.72rem;color:var(--text2)}
+.cover-placeholder{width:100%;aspect-ratio:1;background:var(--card2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.2}
+.player-controls{padding:20px 20px 20px}
+.progress-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.time-label{font-size:.68rem;color:var(--muted);min-width:32px;font-variant-numeric:tabular-nums}
+.time-label.right{text-align:right}
+.progress-wrap{flex:1;height:4px;background:rgba(201,168,76,.15);border-radius:2px;cursor:pointer;position:relative}
+.progress-fill{height:100%;background:var(--gold-grad);border-radius:2px;width:0%;pointer-events:none}
+.btn-row{display:flex;align-items:center;justify-content:center}
+.play-btn{width:56px;height:56px;border-radius:50%;background:var(--gold-grad);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,opacity .15s;box-shadow:0 0 24px rgba(201,168,76,.25)}
+.play-btn:hover{opacity:.88;transform:scale(1.05)}
+.play-btn svg{width:24px;height:24px;fill:#0f0e0c}
 
-    /* Header */
-    .header { text-align: center; margin-bottom: 36px; animation: fadeUp 0.7s 0.1s ease both; }
-    .song-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 7vw, 3.4rem); font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 10px; font-style: italic; }
-    .song-for { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-    .song-for span { color: var(--gold); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transform: none; letter-spacing: 0; }
+/* Generating */
+.generating-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 24px;text-align:center;margin-bottom:20px}
+.pulse-ring{width:64px;height:64px;border-radius:50%;border:1px solid rgba(201,168,76,.3);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;animation:pulse 2s ease-in-out infinite;font-size:1.6rem}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.7}}
+.gen-title{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;color:var(--text);margin-bottom:8px}
+.gen-sub{font-size:.82rem;color:var(--text2);line-height:1.6}
+.refresh-btn{display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--gold);font-size:.75rem;cursor:pointer;transition:background .2s;font-family:'Inter',sans-serif}
+.refresh-btn:hover{background:rgba(201,168,76,.08)}
 
-    /* Cover */
-    .cover-wrap { margin: 0 auto 28px; width: min(260px, 72vw); aspect-ratio: 1; position: relative; animation: fadeUp 0.7s 0.15s ease both; }
-    .cover-wrap::before { content: ''; position: absolute; inset: -1px; border-radius: 16px; background: linear-gradient(135deg, rgba(245,166,35,0.5), transparent 50%, rgba(245,166,35,0.2)); z-index: 0; }
-    .cover-img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; position: relative; z-index: 1; display: block; }
-    .cover-placeholder { width: 100%; height: 100%; border-radius: 15px; background: var(--card); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; font-size: 3.5rem; opacity: 0.25; }
+/* Download row inside player */
+.dl-row{display:flex;gap:10px;margin-top:14px}
+.dl-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(201,168,76,.05);color:var(--gold);font-size:.75rem;text-decoration:none;transition:background .2s;cursor:pointer}
+.dl-btn:hover{background:rgba(201,168,76,.12)}
+.dl-btn svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.dl-btn.disabled{opacity:.35;pointer-events:none}
 
-    /* Generating */
-    .generating-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 44px 28px; text-align: center; margin-bottom: 20px; animation: fadeUp 0.7s 0.2s ease both; }
-    .pulse-ring { width: 72px; height: 72px; border-radius: 50%; border: 1px solid rgba(245,166,35,0.3); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; animation: pulse 2s ease-in-out infinite; font-size: 1.8rem; }
-    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.05);opacity:0.7} }
-    .generating-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--text); margin-bottom: 8px; }
-    .generating-sub { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
-    .refresh-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 20px; padding: 9px 18px; border-radius: 8px; border: 1px solid var(--border); background: none; color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 0.78rem; cursor: pointer; transition: background 0.2s; }
-    .refresh-btn:hover { background: rgba(245,166,35,0.08); }
+/* Lyrics */
+.lyrics-card{border:1px solid rgba(201,168,76,.22);border-radius:20px;overflow:hidden;margin-bottom:20px;position:relative}
+.lyrics-card::before{content:'';position:absolute;inset:-1px;border-radius:21px;background:var(--gold-grad);opacity:.08;pointer-events:none;z-index:0}
+.lyrics-inner{position:relative;z-index:1}
+.lyrics-header-band{background:var(--gold-grad);padding:16px 24px;text-align:center}
+.lyrics-header-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(15,14,12,.65);margin-bottom:4px}
+.lyrics-header-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:#0f0e0c}
+.lyrics-sep{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 0;border-bottom:1px solid var(--border)}
+.lyrics-sep span{font-size:.75rem;color:rgba(201,168,76,.5)}
+.lyrics-sep::before,.lyrics-sep::after{content:'';width:32px;height:1px;background:rgba(201,168,76,.25)}
+.lyrics-body-wrap{padding:20px 24px 16px;background:var(--card)}
+.lyrics-section{margin-bottom:18px}
+.lyrics-section:last-child{margin-bottom:0}
+.ls-label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:500}
+.ls-body{white-space:pre-wrap;font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.9;color:rgba(245,240,232,.78);text-align:center}
+.lyrics-section.is-chorus .ls-label{color:var(--gold)}
+.lyrics-section.is-chorus .ls-body{color:var(--gold2);font-weight:500;padding-left:14px;border-left:2px solid rgba(201,168,76,.4)}
+.lyrics-footer{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:1px solid var(--border);background:var(--card)}
+.lyrics-footer-brand{font-size:.72rem;font-weight:600;background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lyrics-footer-for{font-size:.7rem;color:var(--text2);font-style:italic}
+.copy-btn-wrap{display:flex;justify-content:center;padding:10px 0 14px;background:var(--card)}
+.copy-btn{font-size:.73rem;color:var(--gold);background:none;border:1px solid rgba(201,168,76,.25);border-radius:6px;cursor:pointer;padding:4px 12px;font-family:'Inter',sans-serif;transition:background .2s}
+.copy-btn:hover{background:rgba(201,168,76,.08)}
 
-    /* Custom Player */
-    .player-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px 28px; margin-bottom: 20px; animation: fadeUp 0.7s 0.2s ease both; }
-    .player-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
-    .player-main { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-    .play-btn { width: 52px; height: 52px; border-radius: 50%; background: var(--gold); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.15s, opacity 0.15s; }
-    .play-btn:hover { opacity: 0.88; transform: scale(1.04); }
-    .play-btn svg { width: 22px; height: 22px; fill: #0d0d0d; }
-    .player-info { flex: 1; min-width: 0; }
-    .player-song-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-    .player-for-name { font-size: 0.75rem; color: var(--muted); }
-    .progress-wrap { position: relative; height: 3px; background: rgba(245,166,35,0.15); border-radius: 2px; cursor: pointer; margin-bottom: 8px; }
-    .progress-bar { height: 100%; background: var(--gold); border-radius: 2px; width: 0%; transition: width 0.1s linear; pointer-events: none; }
-    .progress-thumb { position: absolute; top: 50%; width: 12px; height: 12px; background: var(--gold); border-radius: 50%; transform: translate(-50%, -50%); left: 0%; pointer-events: none; transition: left 0.1s linear; }
-    .time-row { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); margin-bottom: 14px; }
-    .download-btn { display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; padding: 11px; border-radius: 10px; border: 1px solid rgba(245,166,35,0.28); background: rgba(245,166,35,0.05); color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; cursor: pointer; text-decoration: none; transition: background 0.2s; }
-    .download-btn:hover { background: rgba(245,166,35,0.11); }
-    .download-btn svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* WhatsApp */
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:var(--radius);background:#25D366;color:#fff;font-size:.9rem;font-weight:600;border:none;cursor:pointer;transition:opacity .2s;text-decoration:none;margin-bottom:20px}
+.wa-btn:hover{opacity:.88}
+.wa-btn svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
 
-    /* Divider */
-    .divider { display: flex; align-items: center; gap: 14px; margin: 28px 0; animation: fadeUp 0.7s 0.28s ease both; }
-    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .divider-icon { color: var(--gold); opacity: 0.4; font-size: 0.75rem; }
+/* CTA */
+.cta-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;text-align:center;margin-bottom:20px}
+.cta-icon-circle{width:48px;height:48px;border-radius:50%;background:rgba(201,168,76,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.3rem}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.cta-sub{font-size:.78rem;color:var(--text2);line-height:1.55;margin-bottom:16px}
+.cta-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:var(--radius-sm);background:var(--gold-grad);color:#0f0e0c;font-weight:600;font-size:.88rem;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s}
+.cta-btn:hover{opacity:.88}
 
-    /* Lyrics */
-    .lyrics-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; animation: fadeUp 0.7s 0.32s ease both; }
-    .lyrics-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
-    .lyrics-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .copy-btn { font-size: 0.73rem; color: var(--gold); background: none; border: 1px solid rgba(245,166,35,0.25); border-radius: 6px; cursor: pointer; opacity: 0.85; transition: opacity 0.2s, background 0.2s; font-family: 'DM Sans', sans-serif; padding: 4px 10px; }
-    .copy-btn:hover { opacity: 1; background: rgba(245,166,35,0.08); }
-    .lyrics-section { margin-bottom: 22px; }
-    .lyrics-section:last-child { margin-bottom: 0; }
-    .lyrics-section-title { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.55; margin-bottom: 7px; font-family: 'DM Sans', sans-serif; }
-    .lyrics-body { white-space: pre-wrap; font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; line-height: 1.95; color: rgba(240,234,214,0.82); text-align: center; }
-    .lyrics-chorus { background: var(--chorus-bg); border-left: 3px solid var(--chorus-border); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 0 -4px; }
-    .lyrics-chorus .lyrics-section-title { opacity: 1; color: var(--gold); }
-    .lyrics-chorus .lyrics-body { color: var(--gold); opacity: 0.92; font-weight: 400; }
+/* Support */
+.support-line{text-align:center;padding:4px 0 16px;font-size:.76rem;color:var(--text2)}
+.support-line a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:1px}
 
-    /* CTA */
-    .cta-card { background: var(--card2); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; margin-top: 20px; text-align: center; animation: fadeUp 0.7s 0.38s ease both; }
-    .cta-card p { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 7px; padding: 12px 24px; border-radius: 10px; background: var(--gold); color: #0d0d0d; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
-    .cta-btn:hover { opacity: 0.88; }
+/* Footer */
+.footer{text-align:center;padding:8px 0 16px}
+.footer img{height:36px;width:auto;margin:0 auto 8px}
+.footer-sub{font-size:.68rem;color:var(--muted)}
 
-    /* Support */
-    .support-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; padding: 16px; animation: fadeUp 0.7s 0.42s ease both; }
-    .support-row p { font-size: 0.8rem; color: var(--muted); }
-    .support-row a { color: var(--gold); text-decoration: none; font-size: 0.8rem; border-bottom: 1px solid rgba(245,166,35,0.3); padding-bottom: 1px; }
-
-    /* Footer */
-    .footer { text-align: center; margin-top: 48px; animation: fadeUp 0.7s 0.45s ease both; }
-    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); opacity: 0.4; letter-spacing: 0.2em; font-weight: 300; }
-    .footer-sub { font-size: 0.7rem; color: var(--muted); margin-top: 5px; opacity: 0.7; }
-
-    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-    @media(max-width:480px){ #content{padding:28px 14px 60px} .player-card,.lyrics-card,.generating-card{padding:20px 16px} .cover-wrap{width:min(220px,70vw)} }
-  </style>
+@media(max-width:400px){.page{padding:24px 12px 60px}.cover-area{max-width:240px}}
+</style>
 </head>
 <body>
-<div class="page">
 
-  <div id="loading">
-    <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U" style="height:40px;width:auto;object-fit:contain;" />
-    <div class="spinner"></div>
+<div id="loading" class="center-screen">
+  <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U" style="height:38px;width:auto"/>
+  <div class="spinner"></div>
+</div>
+
+<div id="error" class="center-screen" style="display:none">
+  <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U" style="height:38px;width:auto"/>
+  <h2 class="error-title"><?php echo htmlspecialchars($cfg['error_title']); ?></h2>
+  <p class="error-p"><?php echo htmlspecialchars($cfg['error_body']); ?></p>
+  <a class="error-a" href="mailto:<?php echo htmlspecialchars($cfg['support_email']); ?>"><?php echo htmlspecialchars($cfg['support_email']); ?></a>
+</div>
+
+<div id="content" class="page" style="display:none">
+
+  <!-- Header -->
+  <div class="header-section fade1">
+    <div class="header-icon">
+      <div class="icon-circle">🎁</div>
+      <div class="icon-circle" style="width:24px;height:24px;font-size:.7rem;margin-left:-8px;margin-top:-16px;background:rgba(201,168,76,.18)">❤️</div>
+    </div>
+    <p class="tribute-label"><?php echo htmlspecialchars($cfg['tribute_label']); ?></p>
+    <h1 class="honoree-name" id="honoree-name">—</h1>
+    <p class="love-from"><?php echo htmlspecialchars($cfg['love_from']); ?> <strong id="client-name">—</strong></p>
   </div>
 
-  <div id="error">
-    <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U" style="height:40px;width:auto;margin-bottom:8px;" />
-    <h2><?php echo htmlspecialchars($cfg['error_title']); ?></h2>
-    <p><?php echo htmlspecialchars($cfg['error_body']); ?></p>
-    <a href="mailto:<?php echo htmlspecialchars($cfg['support_email']); ?>"><?php echo htmlspecialchars($cfg['support_email']); ?></a>
+  <!-- Generating state -->
+  <div class="generating-card fade2" id="generating-card" style="display:none">
+    <div class="pulse-ring">🎼</div>
+    <h2 class="gen-title"><?php echo htmlspecialchars($cfg['generating_title']); ?></h2>
+    <p class="gen-sub"><?php echo htmlspecialchars($cfg['generating_sub']); ?></p>
+    <button class="refresh-btn" onclick="location.reload()">↻ <?php echo htmlspecialchars($cfg['refresh_btn']); ?></button>
   </div>
 
-  <div id="content" class="page">
-    <div class="container">
-
-      <div class="logo-wrap">
-        <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U" />
-      </div>
-
-      <div class="header">
-        <h1 class="song-title" id="titulo">—</h1>
-        <p class="song-for"><?php echo htmlspecialchars($cfg['for_label']); ?> <span id="nome-display">—</span></p>
-      </div>
-
-      <div class="cover-wrap" id="cover-wrap">
-        <div class="cover-placeholder">🎵</div>
-      </div>
-
-      <div class="generating-card" id="generating-card" style="display:none">
-        <div class="pulse-ring">🎼</div>
-        <h2 class="generating-title"><?php echo htmlspecialchars($cfg['generating_title']); ?></h2>
-        <p class="generating-sub"><?php echo htmlspecialchars($cfg['generating_sub']); ?></p>
-        <button class="refresh-btn" onclick="location.reload()">↻ <?php echo htmlspecialchars($cfg['refresh_btn']); ?></button>
-      </div>
-
-      <div class="player-card" id="player-card" style="display:none">
-        <p class="player-label">♪ <?php echo htmlspecialchars($cfg['player_label']); ?></p>
-        <div class="player-main">
-          <button class="play-btn" id="play-btn" onclick="togglePlay()">
-            <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
-          </button>
-          <div class="player-info">
-            <div class="player-song-name" id="player-titulo">—</div>
-            <div class="player-for-name" id="player-nome">—</div>
-          </div>
-        </div>
+  <!-- Player card -->
+  <div class="player-card fade2" id="player-card" style="display:none">
+    <div class="cover-area" id="cover-area">
+      <div class="cover-placeholder" id="cover-placeholder">🎵</div>
+    </div>
+    <div class="player-controls">
+      <div class="progress-row">
+        <span class="time-label" id="time-cur">0:00</span>
         <div class="progress-wrap" id="progress-wrap" onclick="seekAudio(event)">
-          <div class="progress-bar" id="progress-bar"></div>
-          <div class="progress-thumb" id="progress-thumb"></div>
+          <div class="progress-fill" id="progress-fill"></div>
         </div>
-        <div class="time-row">
-          <span id="time-cur">0:00</span>
-          <span id="time-dur">—</span>
-        </div>
-        <a id="download-link" class="download-btn" download>
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <?php echo htmlspecialchars($cfg['download_btn']); ?>
+        <span class="time-label right" id="time-dur">—</span>
+      </div>
+      <div class="btn-row">
+        <button class="play-btn" id="play-btn" onclick="togglePlay()">
+          <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+        </button>
+      </div>
+      <div class="dl-row">
+        <a id="dl-music" class="dl-btn disabled" download>
+          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <?php echo htmlspecialchars($cfg['dl_music']); ?>
         </a>
-        <audio id="audio-player" preload="metadata" style="display:none"></audio>
-      </div>
-
-      <div class="divider" id="lyrics-divider" style="display:none"><span class="divider-icon">✦</span></div>
-
-      <div class="lyrics-card" id="lyrics-card" style="display:none">
-        <div class="lyrics-header">
-          <span class="lyrics-label"><?php echo htmlspecialchars($cfg['lyrics_label']); ?></span>
-          <button class="copy-btn" id="copy-btn" onclick="copyLyrics()"><?php echo htmlspecialchars($cfg['copy_btn']); ?></button>
-        </div>
-        <div id="lyrics-content"></div>
-      </div>
-
-      <div class="cta-card" id="cta-card" style="display:none">
-        <a class="cta-btn" href="<?php echo htmlspecialchars($cfg['cta_url']); ?>">
-          🎵 <?php echo htmlspecialchars($cfg['cta_label']); ?>
+        <a id="dl-photo" class="dl-btn disabled" download>
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <?php echo htmlspecialchars($cfg['dl_photo']); ?>
         </a>
       </div>
+    </div>
+    <audio id="audio-player" preload="metadata" style="display:none"></audio>
+  </div>
 
-      <div class="support-row" id="support-row" style="display:none">
-        <p><?php echo htmlspecialchars($cfg['support_label']); ?> <a href="mailto:<?php echo htmlspecialchars($cfg['support_email']); ?>"><?php echo htmlspecialchars($cfg['support_email']); ?></a></p>
+  <!-- Lyrics -->
+  <div class="lyrics-card fade3" id="lyrics-card" style="display:none">
+    <div class="lyrics-inner">
+      <div class="lyrics-header-band">
+        <div class="lyrics-header-label"><?php echo htmlspecialchars($cfg['lyrics_label']); ?></div>
+        <div class="lyrics-header-title" id="lyrics-titulo">—</div>
       </div>
-
-      <div class="footer">
-        <div class="footer-brand">Tuned4U</div>
-        <p class="footer-sub"><?php echo htmlspecialchars($cfg['footer_sub']); ?></p>
+      <div class="lyrics-sep"><span>♪ ♫ ♪</span></div>
+      <div class="lyrics-body-wrap" id="lyrics-content"></div>
+      <div class="copy-btn-wrap">
+        <button class="copy-btn" id="copy-btn" onclick="copyLyrics()"><?php echo htmlspecialchars($cfg['copy_btn']); ?></button>
       </div>
-
+      <div class="lyrics-footer">
+        <span class="lyrics-footer-brand">Tuned4U</span>
+        <span class="lyrics-footer-for" id="lyrics-footer-for">—</span>
+      </div>
     </div>
   </div>
+
+  <!-- WhatsApp -->
+  <a class="wa-btn fade4" id="wa-btn" href="#" target="_blank" style="display:none">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.009 22l4.973-1.403A9.954 9.954 0 0012 22c5.523 0 10-4.477 10-10S17.522 2 11.999 2z"/></svg>
+    <?php echo htmlspecialchars($cfg['share_whatsapp']); ?>
+  </a>
+
+  <!-- CTA -->
+  <div class="cta-card fade5" id="cta-card" style="display:none">
+    <div class="cta-icon-circle">✨</div>
+    <h3 class="cta-title"><?php echo htmlspecialchars($cfg['cta_title']); ?></h3>
+    <p class="cta-sub"><?php echo htmlspecialchars($cfg['cta_sub']); ?></p>
+    <a class="cta-btn" href="<?php echo htmlspecialchars($cfg['cta_url']); ?>" target="_blank">
+      ✨ <?php echo htmlspecialchars($cfg['cta_btn']); ?>
+    </a>
+  </div>
+
+  <!-- Support -->
+  <p class="support-line fade5" id="support-line" style="display:none">
+    <?php echo htmlspecialchars($cfg['support_label']); ?>
+    <a href="mailto:<?php echo htmlspecialchars($cfg['support_email']); ?>"><?php echo htmlspecialchars($cfg['support_email']); ?></a>
+  </p>
+
+  <!-- Footer -->
+  <div class="footer fade6">
+    <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U"/>
+    <p class="footer-sub"><?php echo htmlspecialchars($cfg['footer_sub']); ?></p>
+  </div>
+
 </div>
 
 <script>
-  const SUPABASE_URL  = 'https://qqxmdszwvwooqonmnvzf.supabase.co';
-  const SUPABASE_ANON = 'sb_publishable_NDbDHWxxykBQ2FqMRgMDZg_O-mir9hv';
-  const uuid        = <?php echo jsStr($uuid); ?>;
-  const table       = <?php echo jsStr($cfg['table']); ?>;
-  const statusReady = <?php echo jsStr($cfg['status_ready']); ?>;
-  const copyDone    = <?php echo jsStr($cfg['copy_done']); ?>;
-  const copyLabel   = <?php echo jsStr($cfg['copy_btn']); ?>;
-  const titleSuffix = <?php echo jsStr($cfg['doc_title_suffix']); ?>;
-  const sectionMap  = <?php echo jsArr($cfg['sections']); ?>;
-  const chorusKeys  = <?php echo jsArr($cfg['chorus_keys']); ?>;
+const SUPABASE_URL  = 'https://qqxmdszwvwooqonmnvzf.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_NDbDHWxxykBQ2FqMRgMDZg_O-mir9hv';
+const uuid         = <?php echo jsStr($uuid); ?>;
+const table        = <?php echo jsStr($cfg['table']); ?>;
+const statusReady  = <?php echo jsStr($cfg['status_ready']); ?>;
+const copyDone     = <?php echo jsStr($cfg['copy_done']); ?>;
+const copyLabel    = <?php echo jsStr($cfg['copy_btn']); ?>;
+const sectionMap   = <?php echo jsArr($cfg['sections']); ?>;
+const chorusKeys   = <?php echo jsArr($cfg['chorus_keys']); ?>;
+const shareTpl     = <?php echo jsStr($cfg['share_msg_tpl']); ?>;
+const loveLabel    = <?php echo jsStr($cfg['love_suffix']); ?>;
 
-  const audio = document.getElementById('audio-player');
+const audio = document.getElementById('audio-player');
 
-  async function load() {
-    if (!uuid) { showError(); return; }
-    try {
-      const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/${table}?uuid=eq.${encodeURIComponent(uuid)}&select=*&limit=1`,
-        { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` } }
-      );
-      if (!res.ok) { showError(); return; }
-      const data = await res.json();
-      if (!data || data.length === 0) { showError(); return; }
-      render(data[0]);
-    } catch(e) { showError(); }
+async function load(){
+  if(!uuid){showError();return;}
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?uuid=eq.${encodeURIComponent(uuid)}&select=*&limit=1`,
+      {headers:{apikey:SUPABASE_ANON,Authorization:`Bearer ${SUPABASE_ANON}`}});
+    if(!res.ok){showError();return;}
+    const data = await res.json();
+    if(!data||data.length===0){showError();return;}
+    render(data[0]);
+  }catch(e){showError();}
+}
+
+function render(g){
+  document.getElementById('loading').style.display='none';
+  document.getElementById('honoree-name').textContent = g.nome||'—';
+  document.getElementById('client-name').textContent  = g.nome||'—';
+  document.getElementById('lyrics-titulo').textContent = g.titulo||'—';
+  document.getElementById('lyrics-footer-for').textContent = `${g.nome||'—'}, ${loveLabel}`;
+
+  if(g.cover_url){
+    document.getElementById('cover-area').innerHTML=
+      `<img src="${g.cover_url}" alt="cover" onerror="this.parentElement.innerHTML='<div class=cover-placeholder>🎵</div>'"/>
+       <div class="cover-overlay"></div>
+       <div class="cover-text">
+         <div class="cover-title">${escHtml(g.titulo||'')}</div>
+       </div>`;
   }
 
-  function render(gift) {
-    document.getElementById('loading').style.display = 'none';
-    document.title = `${gift.titulo || '♪'} ${titleSuffix}`;
-    document.getElementById('titulo').textContent       = gift.titulo || '♪';
-    document.getElementById('nome-display').textContent = gift.nome   || '—';
-    document.getElementById('player-titulo').textContent = gift.titulo || '♪';
-    document.getElementById('player-nome').textContent   = gift.nome   || '—';
-
-    if (gift.cover_url) {
-      document.getElementById('cover-wrap').innerHTML =
-        `<img class="cover-img" src="${gift.cover_url}" alt="portada"
-          onerror="this.parentElement.innerHTML='<div class=cover-placeholder>🎵</div>'" />`;
+  if(g.audio_url && g.status===statusReady){
+    audio.src = g.audio_url;
+    const dlM = document.getElementById('dl-music');
+    dlM.href = g.audio_url;
+    dlM.setAttribute('download',(g.titulo||'song')+'.mp3');
+    dlM.classList.remove('disabled');
+    if(g.cover_url){
+      const dlP = document.getElementById('dl-photo');
+      dlP.href = g.cover_url;
+      dlP.setAttribute('download',(g.titulo||'cover')+'.jpg');
+      dlP.classList.remove('disabled');
     }
-
-    if (gift.audio_url && gift.status === statusReady) {
-      audio.src = gift.audio_url;
-      const dl = document.getElementById('download-link');
-      dl.href = gift.audio_url;
-      dl.setAttribute('download', `${gift.titulo || 'song'}.mp3`);
-      document.getElementById('player-card').style.display = 'block';
-      document.getElementById('cta-card').style.display    = 'block';
-      document.getElementById('support-row').style.display = 'flex';
-
-      audio.addEventListener('timeupdate', updateProgress);
-      audio.addEventListener('loadedmetadata', () => {
-        document.getElementById('time-dur').textContent = fmtTime(audio.duration);
-      });
-      audio.addEventListener('ended', () => {
-        document.getElementById('icon-play').style.display  = '';
-        document.getElementById('icon-pause').style.display = 'none';
-      });
-
-      if (gift.letra) {
-        document.getElementById('lyrics-divider').style.display = 'flex';
-        document.getElementById('lyrics-card').style.display    = 'block';
-        document.getElementById('lyrics-content').innerHTML     = formatLyrics(gift.letra);
-        window._lyricsRaw = gift.letra;
-      }
-    } else {
-      document.getElementById('generating-card').style.display = 'block';
-    }
-    document.getElementById('content').style.display = 'block';
-  }
-
-  function togglePlay() {
-    if (audio.paused) {
-      audio.play();
-      document.getElementById('icon-play').style.display  = 'none';
-      document.getElementById('icon-pause').style.display = '';
-    } else {
-      audio.pause();
-      document.getElementById('icon-play').style.display  = '';
-      document.getElementById('icon-pause').style.display = 'none';
-    }
-  }
-
-  function updateProgress() {
-    if (!audio.duration) return;
-    const pct = (audio.currentTime / audio.duration) * 100;
-    document.getElementById('progress-bar').style.width  = pct + '%';
-    document.getElementById('progress-thumb').style.left = pct + '%';
-    document.getElementById('time-cur').textContent = fmtTime(audio.currentTime);
-  }
-
-  function seekAudio(e) {
-    if (!audio.duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    audio.currentTime = pct * audio.duration;
-  }
-
-  function fmtTime(s) {
-    if (isNaN(s)) return '—';
-    const m = Math.floor(s / 60);
-    const ss = Math.floor(s % 60).toString().padStart(2, '0');
-    return `${m}:${ss}`;
-  }
-
-  function formatLyrics(letra) {
-    let text = letra.replace(/\*\*/g,'').replace(/🎵[^\n]*/g,'').replace(/💝[^\n]*/g,'').trim();
-    const sections = text.split(/\[([^\]]+)\]/);
-    if (sections.length <= 1)
-      return `<div class="lyrics-section"><p class="lyrics-body">${escHtml(text)}</p></div>`;
-    let html = '';
-    for (let i = 1; i < sections.length; i += 2) {
-      const rawKey = sections[i].trim();
-      const body   = (sections[i + 1] || '').trim();
-      if (!body) continue;
-      const label   = sectionMap[rawKey] || rawKey;
-      const isChorus = chorusKeys.some(k => rawKey === k || label === k);
-      const cls = isChorus ? 'lyrics-section lyrics-chorus' : 'lyrics-section';
-      html += `<div class="${cls}">
-        <div class="lyrics-section-title">${escHtml(label)}</div>
-        <p class="lyrics-body">${escHtml(body)}</p>
-      </div>`;
-    }
-    return html || `<p class="lyrics-body">${escHtml(text)}</p>`;
-  }
-
-  function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function copyLyrics() {
-    const text = window._lyricsRaw || document.getElementById('lyrics-content').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('copy-btn');
-      btn.textContent = copyDone;
-      setTimeout(() => btn.textContent = copyLabel, 2000);
+    audio.addEventListener('timeupdate',updateProgress);
+    audio.addEventListener('loadedmetadata',()=>{
+      document.getElementById('time-dur').textContent=fmt(audio.duration);
     });
-  }
+    audio.addEventListener('ended',()=>{
+      document.getElementById('icon-play').style.display='';
+      document.getElementById('icon-pause').style.display='none';
+    });
+    document.getElementById('player-card').style.display='block';
 
-  function showError() {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('error').style.display   = 'flex';
-  }
+    // WhatsApp share
+    const msg = shareTpl
+      .replace('{title}',g.titulo||'')
+      .replace('{honoree}',g.nome||'')
+      .replace('{url}',window.location.href);
+    document.getElementById('wa-btn').href='https://wa.me/?text='+encodeURIComponent(msg);
+    document.getElementById('wa-btn').style.display='flex';
 
-  load();
+    document.getElementById('cta-card').style.display='block';
+    document.getElementById('support-line').style.display='block';
+
+    if(g.letra){
+      document.getElementById('lyrics-card').style.display='block';
+      document.getElementById('lyrics-content').innerHTML=formatLyrics(g.letra);
+      window._lyricsRaw=g.letra;
+    }
+  }else{
+    document.getElementById('generating-card').style.display='block';
+  }
+  document.getElementById('content').style.display='block';
+}
+
+function togglePlay(){
+  if(audio.paused){
+    audio.play();
+    document.getElementById('icon-play').style.display='none';
+    document.getElementById('icon-pause').style.display='';
+  }else{
+    audio.pause();
+    document.getElementById('icon-play').style.display='';
+    document.getElementById('icon-pause').style.display='none';
+  }
+}
+
+function updateProgress(){
+  if(!audio.duration)return;
+  const p=(audio.currentTime/audio.duration)*100;
+  document.getElementById('progress-fill').style.width=p+'%';
+  document.getElementById('time-cur').textContent=fmt(audio.currentTime);
+}
+
+function seekAudio(e){
+  if(!audio.duration)return;
+  const r=e.currentTarget.getBoundingClientRect();
+  audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;
+}
+
+function fmt(s){
+  if(isNaN(s))return'—';
+  return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+}
+
+function formatLyrics(letra){
+  let text=letra.replace(/\*\*/g,'').replace(/🎵[^\n]*/g,'').replace(/💝[^\n]*/g,'').trim();
+  const secs=text.split(/\[([^\]]+)\]/);
+  if(secs.length<=1)return`<div class="lyrics-section"><p class="ls-body">${escHtml(text)}</p></div>`;
+  let html='';
+  for(let i=1;i<secs.length;i+=2){
+    const rawKey=secs[i].trim();
+    const body=(secs[i+1]||'').trim();
+    if(!body)continue;
+    const label=sectionMap[rawKey]||rawKey;
+    const isChorus=chorusKeys.some(k=>rawKey===k||label===k);
+    html+=`<div class="lyrics-section${isChorus?' is-chorus':''}">
+      <div class="ls-label">${escHtml(label)}</div>
+      <p class="ls-body">${escHtml(body)}</p>
+    </div>`;
+  }
+  return html||`<p class="ls-body">${escHtml(text)}</p>`;
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function copyLyrics(){
+  const t=window._lyricsRaw||document.getElementById('lyrics-content').innerText;
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('copy-btn');
+    b.textContent=copyDone;
+    setTimeout(()=>b.textContent=copyLabel,2000);
+  });
+}
+
+function showError(){
+  document.getElementById('loading').style.display='none';
+  document.getElementById('error').style.display='flex';
+}
+
+load();
 </script>
 </body>
 </html>
