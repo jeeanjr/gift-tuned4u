@@ -1,32 +1,27 @@
 <?php
-// ============================================================
-// gift-tuned4u — index.php centralizado
-// Roteamento por domínio: cada domínio = idioma + tabela
-// Adicionar novo idioma: basta incluir uma nova entrada em $langs
-// ============================================================
-
 $uuid = trim($_GET['id'] ?? '', '/');
 if (empty($uuid)) {
     $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     $uuid = $path;
 }
 
-$host = strtolower($_SERVER['HTTP_HOST'] ?? '');
+// Roteamento: variável de ambiente GIFT_LANG (EasyPanel) > HTTP_HOST > fallback EN
+// No EasyPanel: Environment Variables → GIFT_LANG = es  (para regalo.tuned4u.com)
+//                                      GIFT_LANG = en  (para gift.tuned4u.com)
+$envLang = strtolower(trim(getenv('GIFT_LANG') ?: ''));
+$host    = strtolower($_SERVER['HTTP_HOST'] ?? '');
 
-// ── Configuração por domínio ─────────────────────────────────
 $langs = [
 
-  // Espanhol — LATAM
   'regalo.tuned4u.com' => [
-    'lang'        => 'es',
-    'table'       => 'presentes_es',
-    'html_lang'   => 'es',
-    'brand'       => 'Tuned4U',
-    'page_title'  => 'Tuned4U — Tu Canción Personalizada',
-    'loading_alt' => 'Cargando...',
-    'error_title' => 'Canción no encontrada',
-    'error_body'  => 'Este enlace puede ser inválido o la canción aún no ha sido generada. Si crees que es un error, contáctanos.',
-    'for_label'   => 'Una canción creada para',
+    'lang'             => 'es',
+    'table'            => 'presentes_es',
+    'html_lang'        => 'es',
+    'brand'            => 'Tuned4U',
+    'page_title'       => 'Tuned4U — Tu Canción Personalizada',
+    'error_title'      => 'Canción no encontrada',
+    'error_body'       => 'Este enlace puede ser inválido o la canción aún no ha sido generada. Si crees que es un error, contáctanos.',
+    'for_label'        => 'Una canción creada para',
     'generating_title' => 'Componiendo tu canción...',
     'generating_sub'   => 'Nuestra IA está creando algo único para ti.<br>Esto generalmente tarda unos minutos.',
     'refresh_btn'      => '↻ Verificar de nuevo',
@@ -42,17 +37,15 @@ $langs = [
     'status_ready'     => 'GERADO',
   ],
 
-  // Inglês — US/Global
   'gift.tuned4u.com' => [
-    'lang'        => 'en',
-    'table'       => 'tuned4u_gifts',
-    'html_lang'   => 'en',
-    'brand'       => 'Tuned4U',
-    'page_title'  => 'Tuned4U — Your Personal Song',
-    'loading_alt' => 'Loading...',
-    'error_title' => 'Song not found',
-    'error_body'  => 'This link may be invalid or the song hasn\'t been generated yet. If you think this is an error, contact us.',
-    'for_label'   => 'A song created for',
+    'lang'             => 'en',
+    'table'            => 'tuned4u_gifts',
+    'html_lang'        => 'en',
+    'brand'            => 'Tuned4U',
+    'page_title'       => 'Tuned4U — Your Personal Song',
+    'error_title'      => 'Song not found',
+    'error_body'       => "This link may be invalid or the song hasn't been generated yet. If you think this is an error, contact us.",
+    'for_label'        => 'A song created for',
     'generating_title' => 'Composing your song...',
     'generating_sub'   => 'Our AI is crafting something unique for you.<br>This usually takes a few minutes.',
     'refresh_btn'      => '↻ Check again',
@@ -68,16 +61,15 @@ $langs = [
     'status_ready'     => 'GERADO',
   ],
 
-  // ── Futuros idiomas: copiar bloco acima e traduzir ──────────
-  // 'cadeau.tuned4u.com' => [ 'lang'=>'fr', 'table'=>'presentes_fr', ... ],
-  // 'geschenk.tuned4u.com' => [ 'lang'=>'de', 'table'=>'presentes_de', ... ],
-
 ];
 
-// Fallback: EN se domínio não reconhecido
-$cfg = $langs[$host] ?? $langs['gift.tuned4u.com'];
+// Aliases curtos para GIFT_LANG=es / GIFT_LANG=en
+$langs['es'] = $langs['regalo.tuned4u.com'];
+$langs['en'] = $langs['gift.tuned4u.com'];
 
-// Helpers PHP → JS (escape seguro)
+// Seleção: env var > domínio > fallback EN
+$cfg = $langs[$envLang] ?? $langs[$host] ?? $langs['gift.tuned4u.com'];
+
 function jsStr($s) { return json_encode((string)$s, JSON_UNESCAPED_UNICODE); }
 ?>
 <!DOCTYPE html>
