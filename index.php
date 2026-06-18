@@ -30,7 +30,7 @@ $langs = [
     'cta_title'        => 'Crea una canción para alguien especial',
     'cta_sub'          => 'Convierte tu historia en una canción personalizada en minutos.',
     'cta_btn'          => 'Crear mi canción',
-    'cta_url'          => 'https://chat.digitalagencia.store/es',
+    'cta_url'          => 'https://chat.digitalagencia.store/es?utm_source=regalo&utm_medium=pagina_presente&utm_campaign=recompra&utm_content=cta_btn',
     'footer_sub'       => 'Convirtiendo momentos en melodías inolvidables',
     'support_label'    => '¿Preguntas?',
     'support_email'    => 'contact@tuned4u.com',
