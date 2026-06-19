@@ -375,7 +375,7 @@ async function load(){
 function render(g){
   document.getElementById('loading').style.display='none';
   document.getElementById('honoree-name').textContent = g.nome||'—';
-  document.getElementById('client-name').textContent  = g.nome||'—';
+  document.getElementById('client-name').textContent = g.remetente || g.nome || '—';
   document.getElementById('lyrics-titulo').textContent = g.titulo||'—';
   document.getElementById('lyrics-footer-for').textContent = `${g.nome||'—'}, ${loveLabel}`;
 
