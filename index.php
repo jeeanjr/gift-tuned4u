@@ -1,96 +1,9 @@
-<?php
-$uuid = trim($_GET['id'] ?? '', '/');
-if (empty($uuid)) {
-    $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    $uuid = $path;
-}
-$envLang = strtolower(trim(getenv('GIFT_LANG') ?: ''));
-$host    = strtolower($_SERVER['HTTP_HOST'] ?? '');
-
-$langs = [
-  'regalo.tuned4u.com' => [
-    'lang'             => 'es',
-    'table'            => 'presentes_es',
-    'html_lang'        => 'es',
-    'page_title'       => 'Tuned4U — Tu Canción Personalizada',
-    'tribute_label'    => 'Un tributo especial para',
-    'love_from'        => 'Con amor, de',
-    'error_title'      => 'Canción no encontrada',
-    'error_body'       => 'Este enlace puede ser inválido o la canción aún no ha sido generada.',
-    'generating_title' => 'Componiendo tu canción...',
-    'generating_sub'   => 'Nuestra IA está creando algo único. Esto tarda unos minutos.',
-    'refresh_btn'      => 'Verificar de nuevo',
-    'lyrics_label'     => 'Letra de la canción',
-    'love_suffix'      => 'con amor ❤️',
-    'download_title'   => 'Descarga tu regalo',
-    'download_sub'     => 'Todos los archivos de tu tributo',
-    'dl_music'         => 'Música',
-    'dl_photo'         => 'Portada',
-    'share_whatsapp'   => 'Compartir por WhatsApp',
-    'cta_title'        => 'Crea una canción para alguien especial',
-    'cta_sub'          => 'Convierte tu historia en una canción personalizada en minutos.',
-    'cta_btn'          => 'Crear mi canción',
-    'cta_url'          => 'https://chat.digitalagencia.store/es?utm_source=regalo&utm_medium=pagina_presente&utm_campaign=recompra&utm_content=cta_btn',
-    'footer_sub'       => 'Convirtiendo momentos en melodías inolvidables',
-    'support_label'    => '¿Preguntas?',
-    'support_email'    => 'contact@tuned4u.com',
-    'status_ready'     => 'GERADO',
-    'copy_btn'         => 'Copiar',
-    'copy_done'        => 'Copiado ✓',
-    'sections' => [
-      'Intro'=>'Intro','Verse'=>'Verso','Verse 1'=>'Verso 1','Verse 2'=>'Verso 2',
-      'Pre-Chorus'=>'Pre-Coro','Chorus'=>'Coro','Final Chorus'=>'Coro Final',
-      'Bridge'=>'Puente','Outro'=>'Outro',
-    ],
-    'chorus_keys' => ['Chorus','Final Chorus','Coro','Coro Final','Estribillo'],
-    'share_msg_tpl' => '🎵 Escucha "{title}" — ¡un tributo especial para {honoree}! Hecho con amor por Tuned4U ❤️\n\n{url}',
-  ],
-  'gift.tuned4u.com' => [
-    'lang'             => 'en',
-    'table'            => 'tuned4u_gifts',
-    'html_lang'        => 'en',
-    'page_title'       => 'Tuned4U — Your Personal Song',
-    'tribute_label'    => 'A special tribute for',
-    'love_from'        => 'With love, from',
-    'error_title'      => 'Song not found',
-    'error_body'       => "This link may be invalid or the song hasn't been generated yet.",
-    'generating_title' => 'Composing your song...',
-    'generating_sub'   => 'Our AI is crafting something unique. This usually takes a few minutes.',
-    'refresh_btn'      => 'Check again',
-    'lyrics_label'     => 'Song Lyrics',
-    'love_suffix'      => 'with love ❤️',
-    'download_title'   => 'Download your gift',
-    'download_sub'     => 'All files from your tribute',
-    'dl_music'         => 'Music',
-    'dl_photo'         => 'Photo',
-    'share_whatsapp'   => 'Share on WhatsApp',
-    'cta_title'        => 'Create a song for someone you love',
-    'cta_sub'          => 'Turn your story into an exclusive personalized song in minutes.',
-    'cta_btn'          => 'Create my song',
-    'cta_url'          => 'https://tuned4u.com',
-    'footer_sub'       => 'Turning moments into unforgettable melodies',
-    'support_label'    => 'Questions?',
-    'support_email'    => 'contact@tuned4u.com',
-    'status_ready'     => 'GERADO',
-    'copy_btn'         => 'Copy',
-    'copy_done'        => 'Copied ✓',
-    'sections'         => [],
-    'chorus_keys'      => ['Chorus','Final Chorus'],
-    'share_msg_tpl'    => '🎵 Listen to "{title}" — a special tribute for {honoree}! Made with love by Tuned4U ❤️\n\n{url}',
-  ],
-];
-$langs['es'] = $langs['regalo.tuned4u.com'];
-$langs['en'] = $langs['gift.tuned4u.com'];
-$cfg = $langs[$envLang] ?? $langs[$host] ?? $langs['gift.tuned4u.com'];
-function jsStr($s){return json_encode((string)$s,JSON_UNESCAPED_UNICODE);}
-function jsArr($a){return json_encode($a,JSON_UNESCAPED_UNICODE);}
-?>
 <!DOCTYPE html>
-<html lang="<?php echo htmlspecialchars($cfg['html_lang']); ?>">
+<html lang="es" id="html-root">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title><?php echo htmlspecialchars($cfg['page_title']); ?></title>
+<title id="page-title">Tuned4U — Tu Canción Personalizada</title>
 <meta name="robots" content="noindex,nofollow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -237,9 +150,9 @@ img{display:block}
 
 <div id="error" class="center-screen" style="display:none">
   <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U" style="height:38px;width:auto"/>
-  <h2 class="error-title"><?php echo htmlspecialchars($cfg['error_title']); ?></h2>
-  <p class="error-p"><?php echo htmlspecialchars($cfg['error_body']); ?></p>
-  <a class="error-a" href="mailto:<?php echo htmlspecialchars($cfg['support_email']); ?>"><?php echo htmlspecialchars($cfg['support_email']); ?></a>
+  <h2 class="error-title" id="i-errtitle">Canción no encontrada</h2>
+  <p class="error-p" id="i-errp">Este enlace puede ser inválido o la canción aún no ha sido generada.</p>
+  <a class="error-a" href="mailto:contact@tuned4u.com">contact@tuned4u.com</a>
 </div>
 
 <div id="content" class="page" style="display:none">
@@ -250,17 +163,17 @@ img{display:block}
       <div class="icon-circle">🎁</div>
       <div class="icon-circle" style="width:24px;height:24px;font-size:.7rem;margin-left:-8px;margin-top:-16px;background:rgba(201,168,76,.18)">❤️</div>
     </div>
-    <p class="tribute-label"><?php echo htmlspecialchars($cfg['tribute_label']); ?></p>
+    <p class="tribute-label" id="i-tribute">Un tributo especial para</p>
     <h1 class="honoree-name" id="honoree-name">—</h1>
-    <p class="love-from"><?php echo htmlspecialchars($cfg['love_from']); ?> <strong id="client-name">—</strong></p>
+    <p class="love-from"><span id="i-lovefrom">Con amor, de</span> <strong id="client-name">—</strong></p>
   </div>
 
   <!-- Generating state -->
   <div class="generating-card fade2" id="generating-card" style="display:none">
     <div class="pulse-ring">🎼</div>
-    <h2 class="gen-title"><?php echo htmlspecialchars($cfg['generating_title']); ?></h2>
-    <p class="gen-sub"><?php echo htmlspecialchars($cfg['generating_sub']); ?></p>
-    <button class="refresh-btn" onclick="location.reload()">↻ <?php echo htmlspecialchars($cfg['refresh_btn']); ?></button>
+    <h2 class="gen-title" id="i-gentitle">Componiendo tu canción...</h2>
+    <p class="gen-sub" id="i-gensub">Nuestra IA está creando algo único. Esto tarda unos minutos.</p>
+    <button class="refresh-btn" onclick="location.reload()" id="i-refresh">↻ Verificar de nuevo</button>
   </div>
 
   <!-- Player card -->
@@ -285,12 +198,10 @@ img{display:block}
       <div class="dl-row">
         <a id="dl-music" class="dl-btn disabled" download>
           <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-          <?php echo htmlspecialchars($cfg['dl_music']); ?>
-        </a>
+          <span id="i-dlmusic">Música</span>        </a>
         <a id="dl-photo" class="dl-btn disabled" download>
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <?php echo htmlspecialchars($cfg['dl_photo']); ?>
-        </a>
+          <span id="i-dlphoto">Portada</span>        </a>
       </div>
     </div>
     <audio id="audio-player" preload="metadata" style="display:none"></audio>
@@ -300,13 +211,13 @@ img{display:block}
   <div class="lyrics-card fade3" id="lyrics-card" style="display:none">
     <div class="lyrics-inner">
       <div class="lyrics-header-band">
-        <div class="lyrics-header-label"><?php echo htmlspecialchars($cfg['lyrics_label']); ?></div>
+        <div class="lyrics-header-label" id="i-lyrlabel">Letra de la canción</div>
         <div class="lyrics-header-title" id="lyrics-titulo">—</div>
       </div>
       <div class="lyrics-sep"><span>♪ ♫ ♪</span></div>
       <div class="lyrics-body-wrap" id="lyrics-content"></div>
       <div class="copy-btn-wrap">
-        <button class="copy-btn" id="copy-btn" onclick="copyLyrics()"><?php echo htmlspecialchars($cfg['copy_btn']); ?></button>
+        <button class="copy-btn" id="copy-btn" onclick="copyLyrics()">Copiar</button>
       </div>
       <div class="lyrics-footer">
         <span class="lyrics-footer-brand">Tuned4U</span>
@@ -318,29 +229,26 @@ img{display:block}
   <!-- WhatsApp -->
   <a class="wa-btn fade4" id="wa-btn" href="#" target="_blank" style="display:none">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.009 22l4.973-1.403A9.954 9.954 0 0012 22c5.523 0 10-4.477 10-10S17.522 2 11.999 2z"/></svg>
-    <?php echo htmlspecialchars($cfg['share_whatsapp']); ?>
-  </a>
+    <span id="i-wabtn">Compartir por WhatsApp</span>  </a>
 
   <!-- CTA -->
   <div class="cta-card fade5" id="cta-card" style="display:none">
     <div class="cta-icon-circle">✨</div>
-    <h3 class="cta-title"><?php echo htmlspecialchars($cfg['cta_title']); ?></h3>
-    <p class="cta-sub"><?php echo htmlspecialchars($cfg['cta_sub']); ?></p>
-    <a class="cta-btn" href="<?php echo htmlspecialchars($cfg['cta_url']); ?>" target="_blank">
-      ✨ <?php echo htmlspecialchars($cfg['cta_btn']); ?>
-    </a>
+    <h3 class="cta-title" id="i-ctatitle">Crea una canción para alguien especial</h3>
+    <p class="cta-sub" id="i-ctasub">Convierte tu historia en una canción personalizada en minutos.</p>
+    <a class="cta-btn" id="cta-btn-link" href="https://chat.digitalagencia.store/es?utm_source=regalo&amp;utm_medium=pagina_presente&amp;utm_campaign=recompra&amp;utm_content=cta_btn" target="_blank">
+      <span id="i-ctabtn">✨ Crear mi canción</span>    </a>
   </div>
 
   <!-- Support -->
   <p class="support-line fade5" id="support-line" style="display:none">
-    <?php echo htmlspecialchars($cfg['support_label']); ?>
-    <a href="mailto:<?php echo htmlspecialchars($cfg['support_email']); ?>"><?php echo htmlspecialchars($cfg['support_email']); ?></a>
+    <span id="i-support">¿Preguntas?</span>    <a href="mailto:contact@tuned4u.com">contact@tuned4u.com</a>
   </p>
 
   <!-- Footer -->
   <div class="footer fade6">
     <img src="https://qqxmdszwvwooqonmnvzf.supabase.co/storage/v1/object/public/assets/logo.tuned4u.nobackground.png" alt="Tuned4U"/>
-    <p class="footer-sub"><?php echo htmlspecialchars($cfg['footer_sub']); ?></p>
+    <p class="footer-sub" id="i-footsub">Convirtiendo momentos en melodías inolvidables</p>
   </div>
 
 </div>
@@ -348,15 +256,128 @@ img{display:block}
 <script>
 const SUPABASE_URL  = 'https://qqxmdszwvwooqonmnvzf.supabase.co';
 const SUPABASE_ANON = 'sb_publishable_NDbDHWxxykBQ2FqMRgMDZg_O-mir9hv';
-const uuid         = <?php echo jsStr($uuid); ?>;
-const table        = <?php echo jsStr($cfg['table']); ?>;
-const statusReady  = <?php echo jsStr($cfg['status_ready']); ?>;
-const copyDone     = <?php echo jsStr($cfg['copy_done']); ?>;
-const copyLabel    = <?php echo jsStr($cfg['copy_btn']); ?>;
-const sectionMap   = <?php echo jsArr($cfg['sections']); ?>;
-const chorusKeys   = <?php echo jsArr($cfg['chorus_keys']); ?>;
-const shareTpl     = <?php echo jsStr($cfg['share_msg_tpl']); ?>;
-const loveLabel    = <?php echo jsStr($cfg['love_suffix']); ?>;
+/* O uuid agora sai do endereco (regalo.tuned4u.com/<uuid>), entao a mesma
+   pagina serve qualquer presente sem o servidor precisar injetar nada. */
+const uuid         = (location.pathname.split('/').filter(Boolean)[0] || '').trim();
+const table        = "presentes_es";
+const statusReady  = "GERADO";
+const FUNIL_BASE   = "https://chat.digitalagencia.store/";
+
+/* Um dicionario por idioma. O idioma vem do registro do presente
+   (coluna lang, gravada pelo fluxo n8n de cada mercado), com ?lang=
+   na URL como forca-teste e 'es' como reserva de tudo. */
+const TX = {
+ es: {
+  title:"Tuned4U — Tu Canción Personalizada",
+  errtitle:"Canción no encontrada",
+  errp:"Este enlace puede ser inválido o la canción aún no ha sido generada.",
+  tribute:"Un tributo especial para", lovefrom:"Con amor, de",
+  gentitle:"Componiendo tu canción...",
+  gensub:"Nuestra IA está creando algo único. Esto tarda unos minutos.",
+  refresh:"↻ Verificar de nuevo", dlmusic:"Música", dlphoto:"Portada",
+  lyrlabel:"Letra de la canción", copyLabel:"Copiar", copyDone:"Copiado ✓",
+  wabtn:"Compartir por WhatsApp",
+  ctatitle:"Crea una canción para alguien especial",
+  ctasub:"Convierte tu historia en una canción personalizada en minutos.",
+  ctabtn:"✨ Crear mi canción", support:"¿Preguntas?",
+  footsub:"Convirtiendo momentos en melodías inolvidables",
+  loveLabel:"con amor ❤️",
+  shareTpl:"🎵 Escucha \"{title}\" — ¡un tributo especial para {honoree}! Hecho con amor por Tuned4U ❤️\\n\\n{url}",
+  sectionMap:{"Intro":"Intro","Verse":"Verso","Verse 1":"Verso 1","Verse 2":"Verso 2","Verse 3":"Verso 3","Pre-Chorus":"Pre-Coro","Chorus":"Coro","Final Chorus":"Coro Final","Bridge":"Puente","Outro":"Outro"},
+  chorusKeys:["Chorus","Final Chorus","Coro","Coro Final","Estribillo"]
+ },
+ en: {
+  title:"Tuned4U — Your Custom Song",
+  errtitle:"Song not found",
+  errp:"This link may be invalid or the song has not been generated yet.",
+  tribute:"A special tribute to", lovefrom:"With love, from",
+  gentitle:"Composing your song...",
+  gensub:"Our AI is creating something unique. This takes a few minutes.",
+  refresh:"↻ Check again", dlmusic:"Music", dlphoto:"Cover",
+  lyrlabel:"Song lyrics", copyLabel:"Copy", copyDone:"Copied ✓",
+  wabtn:"Share on WhatsApp",
+  ctatitle:"Create a song for someone special",
+  ctasub:"Turn your story into a custom song in minutes.",
+  ctabtn:"✨ Create my song", support:"Questions?",
+  footsub:"Turning moments into unforgettable melodies",
+  loveLabel:"with love ❤️",
+  shareTpl:"🎵 Listen to \"{title}\" — a special tribute to {honoree}! Made with love by Tuned4U ❤️\\n\\n{url}",
+  sectionMap:{"Intro":"Intro","Verse":"Verse","Verse 1":"Verse 1","Verse 2":"Verse 2","Verse 3":"Verse 3","Pre-Chorus":"Pre-Chorus","Chorus":"Chorus","Final Chorus":"Final Chorus","Bridge":"Bridge","Outro":"Outro"},
+  chorusKeys:["Chorus","Final Chorus"]
+ },
+ fr: {
+  title:"Tuned4U — Ta Chanson Personnalisée",
+  errtitle:"Chanson introuvable",
+  errp:"Ce lien est peut-être invalide ou la chanson n'a pas encore été générée.",
+  tribute:"Un hommage spécial pour", lovefrom:"Avec amour, de",
+  gentitle:"Composition de ta chanson...",
+  gensub:"Notre IA crée quelque chose d'unique. Cela prend quelques minutes.",
+  refresh:"↻ Vérifier à nouveau", dlmusic:"Musique", dlphoto:"Pochette",
+  lyrlabel:"Paroles de la chanson", copyLabel:"Copier", copyDone:"Copié ✓",
+  wabtn:"Partager sur WhatsApp",
+  ctatitle:"Crée une chanson pour quelqu'un de spécial",
+  ctasub:"Transforme ton histoire en chanson personnalisée en quelques minutes.",
+  ctabtn:"✨ Créer ma chanson", support:"Des questions ?",
+  footsub:"Des moments transformés en mélodies inoubliables",
+  loveLabel:"avec amour ❤️",
+  shareTpl:"🎵 Écoute \"{title}\" — un hommage spécial pour {honoree} ! Fait avec amour par Tuned4U ❤️\\n\\n{url}",
+  sectionMap:{"Intro":"Intro","Verse":"Couplet","Verse 1":"Couplet 1","Verse 2":"Couplet 2","Verse 3":"Couplet 3","Pre-Chorus":"Pré-Refrain","Chorus":"Refrain","Final Chorus":"Refrain Final","Bridge":"Pont","Outro":"Final"},
+  chorusKeys:["Chorus","Final Chorus","Refrain","Refrain Final"]
+ },
+ it: {
+  title:"Tuned4U — La Tua Canzone Personalizzata",
+  errtitle:"Canzone non trovata",
+  errp:"Questo link potrebbe non essere valido o la canzone non è ancora stata generata.",
+  tribute:"Un tributo speciale per", lovefrom:"Con amore, da",
+  gentitle:"Componendo la tua canzone...",
+  gensub:"La nostra IA sta creando qualcosa di unico. Ci vogliono alcuni minuti.",
+  refresh:"↻ Controlla di nuovo", dlmusic:"Musica", dlphoto:"Copertina",
+  lyrlabel:"Testo della canzone", copyLabel:"Copia", copyDone:"Copiato ✓",
+  wabtn:"Condividi su WhatsApp",
+  ctatitle:"Crea una canzone per qualcuno di speciale",
+  ctasub:"Trasforma la tua storia in una canzone personalizzata in pochi minuti.",
+  ctabtn:"✨ Crea la mia canzone", support:"Domande?",
+  footsub:"Trasformiamo momenti in melodie indimenticabili",
+  loveLabel:"con amore ❤️",
+  shareTpl:"🎵 Ascolta \"{title}\" — un tributo speciale per {honoree}! Fatto con amore da Tuned4U ❤️\\n\\n{url}",
+  sectionMap:{"Intro":"Intro","Verse":"Strofa","Verse 1":"Strofa 1","Verse 2":"Strofa 2","Verse 3":"Strofa 3","Pre-Chorus":"Pre-Ritornello","Chorus":"Ritornello","Final Chorus":"Ritornello Finale","Bridge":"Bridge","Outro":"Finale"},
+  chorusKeys:["Chorus","Final Chorus","Ritornello","Ritornello Finale"]
+ }
+};
+
+const qsLang = new URLSearchParams(location.search).get('lang');
+let LANG = ['es','en','fr','it'].includes(qsLang) ? qsLang : 'es';
+let T = TX[LANG];
+let sectionMap = T.sectionMap;
+let chorusKeys = T.chorusKeys;
+let shareTpl   = T.shareTpl;
+let loveLabel  = T.loveLabel;
+let copyDone   = T.copyDone;
+let copyLabel  = T.copyLabel;
+
+function applyLang(l){
+  if(!TX[l]) l = 'es';
+  LANG = l; T = TX[l];
+  sectionMap = T.sectionMap; chorusKeys = T.chorusKeys;
+  shareTpl = T.shareTpl; loveLabel = T.loveLabel;
+  copyDone = T.copyDone; copyLabel = T.copyLabel;
+  document.getElementById('html-root').setAttribute('lang', l);
+  document.getElementById('page-title').textContent = T.title;
+  document.title = T.title;
+  const ids = {'i-errtitle':'errtitle','i-errp':'errp','i-tribute':'tribute','i-lovefrom':'lovefrom',
+    'i-gentitle':'gentitle','i-gensub':'gensub','i-refresh':'refresh','i-dlmusic':'dlmusic',
+    'i-dlphoto':'dlphoto','i-lyrlabel':'lyrlabel','i-wabtn':'wabtn','i-ctatitle':'ctatitle',
+    'i-ctasub':'ctasub','i-ctabtn':'ctabtn','i-support':'support','i-footsub':'footsub'};
+  for(const id in ids){
+    const el = document.getElementById(id);
+    if(el) el.textContent = T[ids[id]];
+  }
+  const cbtn = document.getElementById('copy-btn');
+  if(cbtn) cbtn.textContent = T.copyLabel;
+  document.getElementById('cta-btn-link').href =
+    FUNIL_BASE + l + '?utm_source=regalo&utm_medium=pagina_presente&utm_campaign=recompra&utm_content=cta_btn';
+}
+applyLang(LANG);
 
 const audio = document.getElementById('audio-player');
 
@@ -373,6 +394,8 @@ async function load(){
 }
 
 function render(g){
+  /* O idioma definitivo mora no registro; ?lang= na URL vence para testes. */
+  if(!qsLang && g.lang) applyLang(String(g.lang).toLowerCase());
   document.getElementById('loading').style.display='none';
   document.getElementById('honoree-name').textContent = g.nome||'—';
   document.getElementById('client-name').textContent = g.remetente || g.nome || '—';
