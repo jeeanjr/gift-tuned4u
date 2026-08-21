@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" id="html-root">
+<html lang="en" id="html-root">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title id="page-title">Tuned4U — Tu Canción Personalizada</title>
+<title id="page-title">Tuned4U — Your Custom Song</title>
 <meta name="robots" content="noindex,nofollow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -346,7 +346,7 @@ const TX = {
 };
 
 const qsLang = new URLSearchParams(location.search).get('lang');
-let LANG = ['es','en','fr','it'].includes(qsLang) ? qsLang : 'es';
+let LANG = ['es','en','fr','it'].includes(qsLang) ? qsLang : 'en';
 let T = TX[LANG];
 let sectionMap = T.sectionMap;
 let chorusKeys = T.chorusKeys;
