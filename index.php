@@ -236,7 +236,7 @@ img{display:block}
     <div class="cta-icon-circle">✨</div>
     <h3 class="cta-title" id="i-ctatitle">Crea una canción para alguien especial</h3>
     <p class="cta-sub" id="i-ctasub">Convierte tu historia en una canción personalizada en minutos.</p>
-    <a class="cta-btn" id="cta-btn-link" href="https://chat.digitalagencia.store/es?utm_source=regalo&amp;utm_medium=pagina_presente&amp;utm_campaign=recompra&amp;utm_content=cta_btn" target="_blank">
+    <a class="cta-btn" id="cta-btn-link" href="https://es.tuned4u.com/?utm_source=regalo&amp;utm_medium=pagina_presente&amp;utm_campaign=recompra&amp;utm_content=cta_btn" target="_blank">
       <span id="i-ctabtn">✨ Crear mi canción</span>    </a>
   </div>
 
@@ -261,7 +261,15 @@ const SUPABASE_ANON = 'sb_publishable_NDbDHWxxykBQ2FqMRgMDZg_O-mir9hv';
 const uuid         = (location.pathname.split('/').filter(Boolean)[0] || '').trim();
 const table        = "presentes_es";
 const statusReady  = "GERADO";
-const FUNIL_BASE   = "https://chat.digitalagencia.store/";
+/* Funil de recompra por idioma: o funil NOVO (deteccao de mercado por
+   dominio ja embutida nele). O lead chega com utm_source=regalo, entao
+   fica registrado que veio da pagina do presente. */
+const FUNIL_LANG = {
+  es: "https://es.tuned4u.com/",
+  en: "https://song.tuned4u.com/",
+  fr: "https://fr.tuned4u.com/",
+  it: "https://it.tuned4u.com/"
+};
 
 /* Um dicionario por idioma. O idioma vem do registro do presente
    (coluna lang, gravada pelo fluxo n8n de cada mercado), com ?lang=
@@ -387,7 +395,7 @@ function applyLang(l){
   const cbtn = document.getElementById('copy-btn');
   if(cbtn) cbtn.textContent = T.copyLabel;
   document.getElementById('cta-btn-link').href =
-    FUNIL_BASE + l + '?utm_source=regalo&utm_medium=pagina_presente&utm_campaign=recompra&utm_content=cta_btn';
+    (FUNIL_LANG[l] || FUNIL_LANG.es) + '?utm_source=regalo&utm_medium=pagina_presente&utm_campaign=recompra&utm_content=cta_btn';
 }
 applyLang(LANG);
 
