@@ -346,21 +346,19 @@ const TX = {
 };
 
 const qsLang = new URLSearchParams(location.search).get('lang');
-/* MESMO arquivo em todos os dominios. A cadeia de decisao do idioma:
-   1) ?lang= na URL (forca-teste)
-   2) lang gravado no registro do presente (aplicado no render)
-   3) o dominio onde a pagina esta aberta (tabela abaixo)
-   4) espanhol como ultima reserva
-   Assim um unico index.html sobe identico em gift/cadeau/ilregalo/regalo
-   e cada um ja abre no idioma do seu funil, inclusive telas de erro. */
+/* MESMO arquivo em todos os dominios, e O DOMINIO MANDA SEMPRE:
+   abriu no gift, e ingles; no cadeau, frances; no ilregalo, italiano;
+   no regalo, espanhol. Nada troca o idioma dentro dos dominios oficiais
+   (nem ?lang=, nem o registro). A query e o lang do registro so decidem
+   quando a pagina roda FORA desses dominios (preview, teste local). */
 const DOMINIO_LANG = {
-  'gift.tuned4u.com': 'en',
-  'cadeau.tuned4u.com': 'fr',
-  'ilregalo.tuned4u.com': 'it',
-  'regalo.tuned4u.com': 'es'
+  'gift.tuned4u.com': 'en',     'www.gift.tuned4u.com': 'en',
+  'cadeau.tuned4u.com': 'fr',   'www.cadeau.tuned4u.com': 'fr',
+  'ilregalo.tuned4u.com': 'it', 'www.ilregalo.tuned4u.com': 'it',
+  'regalo.tuned4u.com': 'es',   'www.regalo.tuned4u.com': 'es'
 };
 const hostLang = DOMINIO_LANG[location.hostname] || null;
-let LANG = ['es','en','fr','it'].includes(qsLang) ? qsLang : (hostLang || 'es');
+let LANG = hostLang || (['es','en','fr','it'].includes(qsLang) ? qsLang : 'es');
 let T = TX[LANG];
 let sectionMap = T.sectionMap;
 let chorusKeys = T.chorusKeys;
@@ -408,8 +406,9 @@ async function load(){
 }
 
 function render(g){
-  /* O idioma definitivo mora no registro; ?lang= na URL vence para testes. */
-  if(!qsLang && g.lang) applyLang(String(g.lang).toLowerCase());
+  /* Dentro dos dominios oficiais o idioma ja esta travado pelo dominio;
+     o lang do registro so decide quando a pagina roda fora deles. */
+  if(!hostLang && !qsLang && g.lang) applyLang(String(g.lang).toLowerCase());
   document.getElementById('loading').style.display='none';
   document.getElementById('honoree-name').textContent = g.nome||'—';
   document.getElementById('client-name').textContent = g.remetente || g.nome || '—';
