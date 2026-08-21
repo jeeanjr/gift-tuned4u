@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root">
+<html lang="es" id="html-root">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title id="page-title">Tuned4U — Your Custom Song</title>
+<title id="page-title">Tuned4U — Tu Canción Personalizada</title>
 <meta name="robots" content="noindex,nofollow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -346,7 +346,21 @@ const TX = {
 };
 
 const qsLang = new URLSearchParams(location.search).get('lang');
-let LANG = ['es','en','fr','it'].includes(qsLang) ? qsLang : 'en';
+/* MESMO arquivo em todos os dominios. A cadeia de decisao do idioma:
+   1) ?lang= na URL (forca-teste)
+   2) lang gravado no registro do presente (aplicado no render)
+   3) o dominio onde a pagina esta aberta (tabela abaixo)
+   4) espanhol como ultima reserva
+   Assim um unico index.html sobe identico em gift/cadeau/ilregalo/regalo
+   e cada um ja abre no idioma do seu funil, inclusive telas de erro. */
+const DOMINIO_LANG = {
+  'gift.tuned4u.com': 'en',
+  'cadeau.tuned4u.com': 'fr',
+  'ilregalo.tuned4u.com': 'it',
+  'regalo.tuned4u.com': 'es'
+};
+const hostLang = DOMINIO_LANG[location.hostname] || null;
+let LANG = ['es','en','fr','it'].includes(qsLang) ? qsLang : (hostLang || 'es');
 let T = TX[LANG];
 let sectionMap = T.sectionMap;
 let chorusKeys = T.chorusKeys;
